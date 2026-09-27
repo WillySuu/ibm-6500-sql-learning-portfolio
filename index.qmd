@@ -1,0 +1,12 @@
+# IBM 6500 SQL Learning Portfolio
+
+**Student:** Willy Su  
+**Course:** IBM 6500
+
+This portfolio documents my learning and course-completion work for SQL and related data skills in DataCamp.
+
+## Reports
+
+- [Introduction to SQL](introduction-to-sql.html)
+- Introduction to BigQuery (to be completed)
+- Intermediate SQL (to be completed)
