@@ -1,0 +1,196 @@
+---
+title: "Intermediate SQL: Course Completion and Learning Notes"
+author: "Willy Su"
+date: today
+
+format:
+  html:
+    toc: true
+    toc-title: "Contents"
+    toc-depth: 3
+    number-sections: true
+    smooth-scroll: true
+    embed-resources: true
+---
+
+# Course-Completion Evidence
+
+I completed the DataCamp Intermediate SQL course on October 21, 2026, as part of the IBM 6500 course requirements. The certificate below provides evidence of my course completion.
+
+![DataCamp Intermediate SQL Certificate](images/intermediate-sql-certificate.png)
+
+# Learning Notes and Key Takeaways
+
+## Chapter 1: Data Aggregation
+
+### Main Ideas
+
+In this chapter, I learned how to summarize data using SQL. Instead of looking at every individual record, I can use aggregate functions to calculate totals, averages, and counts. I also learned how to group data by one or multiple columns to compare different categories.
+
+### Important SQL Syntax
+
+-   COUNT(): Counts the number of records or non-null values.
+-   SUM(): Calculates the total of numeric values.
+-   AVG(): Calculates the average of numeric values.
+-   MIN() and MAX(): Find the smallest and largest values.
+-   GROUP BY: Groups records based on one or more columns.
+
+### When to Use It
+
+Data aggregation is useful when analyzing large datasets. For example, a marketing team can calculate the total number of website visits or compare consultation requests across different marketing channels.
+
+### SQL Example
+
+``` sql
+SELECT marketing_channel,
+       COUNT(*) AS total_requests
+FROM consultations
+GROUP BY marketing_channel
+ORDER BY total_requests DESC;
+```
+
+### Explanation
+
+This query counts the number of consultation records for each marketing channel. GROUP BY separates the records into different channels, and COUNT(\*) calculates the total for each group. ORDER BY displays the channels with the most consultation requests first.
+
+### CEP Application
+
+For our orthodontics CEP project, data aggregation could help us compare how many consultation requests come from Google Ads, organic search, or other marketing channels. This information could help the practice understand which channels generate more interest from potential patients.
+
+## Chapter 2: Data Transformation
+
+### Main Ideas
+
+In this chapter, I learned how to create new values from existing data using SQL. Basic transformations allow me to perform calculations, while complex transformations help me calculate percentages and other useful metrics. These techniques make raw data easier to understand and analyze.
+
+### Important SQL Syntax
+
+-   Arithmetic operators (+, -, \*, /): Perform calculations using numeric values.
+-   AS: Gives a new name to a calculated column.
+-   ROUND(): Rounds numeric results to a specified number of decimal places.
+-   SUM(): Can be used in calculations to find totals.
+-   Subqueries: Allow a query to use results from another query.
+
+### When to Use It
+
+Data transformation is useful when the original dataset does not contain the metrics needed for analysis. For example, a marketing team can calculate conversion rates or the percentage of total consultation requests coming from each marketing channel.
+
+### SQL Example
+
+``` sql
+SELECT marketing_channel,
+       COUNT(*) AS total_requests,
+       ROUND(
+           100.0 * COUNT(*) /
+           (SELECT COUNT(*) FROM consultations),
+           2
+       ) AS percentage_of_total
+FROM consultations
+GROUP BY marketing_channel;
+```
+
+### Explanation
+
+This query calculates the number of consultation requests from each marketing channel and its percentage of all requests. COUNT(\*) counts the requests in each group. The subquery calculates the total number of requests, and ROUND() displays the percentage with two decimal places.
+
+### CEP Application
+
+For our orthodontics CEP project, data transformation could help us calculate marketing performance metrics. For example, we could compare the percentage of consultation requests from Google Ads and organic search. This could help the practice understand how different marketing channels contribute to potential patient interest.
+
+## Chapter 3: Data Filtering
+
+### Main Ideas
+
+In this chapter, I learned how to filter data using SQL. Filtering allows me to select only the records that meet certain conditions. I also learned how to combine multiple conditions and use more complex filters to find specific information in a dataset.
+
+### Important SQL Syntax
+
+-   WHERE: Filters rows based on specific conditions.
+-   AND: Requires multiple conditions to be true.
+-   OR: Returns rows when at least one condition is true.
+-   NOT: Excludes records that match a condition.
+-   IN: Checks whether a value matches one of several options.
+-   LIKE: Searches for text patterns.
+-   IS NULL: Finds missing values.
+
+### When to Use It
+
+Data filtering is useful when I only need to analyze a specific part of a dataset. For example, a marketing team may want to look at consultation requests from Google Ads or organic search during a certain time period.
+
+### SQL Example
+
+``` sql
+SELECT consultation_id,
+       marketing_channel,
+       consultation_date
+FROM consultations
+WHERE marketing_channel IN ('Google Ads', 'Organic Search')
+  AND consultation_date >= '2026-01-01'
+  AND consultation_date < '2027-01-01';
+```
+
+### Explanation
+
+This query selects consultation records from Google Ads and organic search during 2026. The IN operator filters the marketing channels, while AND combines this condition with the date range. Only records that meet both conditions will appear in the results.
+
+### CEP Application
+
+For our orthodontics CEP project, data filtering could help us focus on specific groups of potential patients or marketing channels. For example, we could examine consultation requests from Google Ads during a campaign period. This could help the practice better understand the performance of its digital marketing activities.
+
+## Chapter 4: Conditional Operations
+
+### Main Ideas
+
+In this chapter, I learned how to use conditional logic in SQL. The CASE statement allows me to create different results based on specific conditions. I also learned how to combine conditional statements with aggregate functions to summarize data more effectively.
+
+### Important SQL Syntax
+
+-   CASE: Applies different results based on conditions.
+-   WHEN: Defines a condition to check.
+-   THEN: Specifies the result when a condition is true.
+-   ELSE: Provides a result when no conditions are met.
+-   END: Completes the CASE statement.
+-   SUM() and COUNT(): Can be combined with CASE to calculate conditional summaries.
+
+### When to Use It
+
+Conditional operations are useful when I need to classify records into categories or calculate results for specific groups. For example, a marketing team can classify consultation requests based on their status and count how many requests were completed.
+
+### SQL Example
+
+``` sql
+SELECT marketing_channel,
+       COUNT(*) AS total_requests,
+       SUM(CASE
+           WHEN consultation_status = 'Completed' THEN 1
+           ELSE 0
+       END) AS completed_requests
+FROM consultations
+GROUP BY marketing_channel;
+```
+
+### Explanation
+
+This query counts the total number of consultation requests and completed requests for each marketing channel. The CASE statement checks whether the consultation status is Completed. If the condition is true, it returns 1; otherwise, it returns 0. SUM() adds these values to calculate the number of completed requests.
+
+### CEP Application
+
+For our orthodontics CEP project, conditional operations could help us compare consultation outcomes across different marketing channels. For example, we could identify how many consultation requests from Google Ads or organic search were completed. This information could help the practice evaluate its marketing performance and understand which channels lead to more completed consultations.
+
+## Overall Reflection and Series Synthesis
+
+After completing the Intermediate SQL course, I have a better understanding of how SQL can be used to analyze and organize data. Compared to Introduction to SQL, this course helped me learn more advanced skills, such as grouping data, performing calculations, filtering records, and using conditional statements.
+
+One of the most useful things I learned was how to use GROUP BY and aggregate functions to summarize information. I also found CASE statements helpful because they allow me to organize data into different categories based on specific conditions.
+
+For our orthodontics CEP project, these SQL skills could help us analyze website traffic, marketing channels, and consultation requests if the necessary data becomes available. For example, we could compare how different marketing channels perform and identify areas that may need improvement.
+
+Overall, this course helped me become more comfortable working with SQL. I believe these skills will be useful for future marketing analytics projects and for making decisions based on data.
+
+## Appendix: Publication Links
+
+- [GitHub Repository](https://github.com/WillySuu/ibm-6500-sql-learning-portfolio)
+- [SQL Learning Portfolio - GitHub Pages](https://willysuu.github.io/ibm-6500-sql-learning-portfolio/)
+- [Intermediate SQL Report](https://willysuu.github.io/ibm-6500-sql-learning-portfolio/intermediate-sql.html)
+
+
