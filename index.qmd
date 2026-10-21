@@ -9,4 +9,4 @@ This portfolio documents my learning and course-completion work for SQL and rela
 
 - [Introduction to SQL](introduction-to-sql.html)
 - [Introduction to BigQuery](introduction-to-bigquery.html)
-- Intermediate SQL (to be completed)
+- [Intermediate SQL](intermediate-sql.html)
